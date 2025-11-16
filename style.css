@@ -1,0 +1,238 @@
+:root {
+  --bg: #E4EBFA;
+  --card: #ffffff;
+  --muted: #828FA3;
+  --blue: #49C4E5;
+  --purple: #8471F2;
+  --green: #67E2AE;
+  --accent: #635FC7;
+}
+
+/* Basic reset */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--bg);
+  color: #111;
+}
+
+/* ---------- Layout ---------- */
+.container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 250px 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "side heading heading heading"
+    "side todo doing done";
+  gap: 16px;
+  padding: 16px;
+}
+
+/* ---------- Sidebar ---------- */
+.side-panel {
+  grid-area: side;
+  background: var(--card);
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-logo { width: 80%; height: 64px; object-fit: contain; }
+.all-boards { font-size: 11px; color: var(--muted); }
+.board-pill { background: #635FC7; padding: 8px 12px; border-radius: 24px; font-weight: 600; width: 100%; text-align: center; color: white; }
+
+/* ---------- Header ---------- */
+.heading {
+  grid-area: heading;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-radius: 8px;
+  height: 72px;
+}
+
+.heading-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.heading-left h1 { margin: 0; font-size: 18px; }
+
+.heading-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Rectangle add buttons (desktop) */
+.add-btn {
+  background: var(--accent);
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Circle add button (mobile header) */
+.circle-btn {
+  display: none; /* show only on smaller screens */
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- Columns ---------- */
+section.column { background: transparent; padding: 10px; }
+
+.column .column-inner {
+  background: transparent;
+  border-radius: 8px;
+  min-height: 60vh;
+  padding: 12px;
+}
+
+.task-names {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 700;
+  margin: 8px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-names .dot {
+  width: 12px; height: 12px; border-radius: 50%; display: inline-block;
+}
+
+.todo .dot { background: var(--blue); }
+.doing .dot { background: var(--purple); }
+.done .dot { background: var(--green); }
+
+/* ---------- Tasks ---------- */
+.task-list { margin-top: 8px; }
+
+.task {
+  background: var(--card);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  cursor: pointer;
+}
+
+.task-title { margin: 0 0 6px 0; font-size: 14px; }
+.task-desc { margin: 0; font-size: 12px; color: #555; }
+
+/* ---------- Floating Add Button (optional hidden) ---------- */
+.fab {
+  display: none;
+}
+
+/* ---------- Modal ---------- */
+.modal.hidden { display: none; }
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 360px;
+  max-width: 94%;
+  background: white;
+  padding: 18px;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+.close-btn { float: right; border: none; background: transparent; font-size: 20px; cursor: pointer; }
+label { display: block; margin-top: 10px; font-weight: 600; font-size: 13px; }
+
+input, textarea, select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.modal-actions { margin-top: 12px; display: flex; justify-content: flex-end; gap: 8px; }
+.primary {
+  background: var(--accent);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* Readonly */
+.readonly input, .readonly textarea, .readonly select {
+  pointer-events: none;
+  opacity: 0.7;
+}
+@media (min-width: 769px) {
+  .hidden-logo {
+    display: none;
+  } 
+}
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "heading"
+      "todo"
+      "doing"
+      "done";
+    padding: 8px;
+  }
+
+  .side-panel { display: none; } /* hide sidebar on smaller screens */
+
+  /* heading becomes the top bar with circle button */
+  .heading { height: 64px; padding: 10px; }
+
+  /* hide rectangle desktop buttons, show circle button */
+  .add-btn { display: none; }
+  .circle-btn { display: inline-flex; }
+
+  /* columns stack as single column (one column layout) */
+  .column .column-inner { min-height: 40vh; padding: 10px; }
+
+  /* modal width on small screens */
+  .modal-content { width: 92%; max-width: 460px; }
+  .hidden-h1{
+    display: none;
+  }
+  
+}
+
+/* small polish */
+@media (max-width: 420px) {
+  .modal-content { padding: 12px; }
+}

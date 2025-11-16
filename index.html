@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Aphiwokuhle Kanban Board</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="light">
+  <div class="container">
+    <!-- SIDEBAR -->
+    <aside class="side-panel">
+      
+  <img class="app-logo desktop-logo" src="assets/logo-light.svg" alt="Logo" />
+  
+
+      <p class="all-boards">ALL BOARDS (1)</p>
+      <div class="board-pill" id="boardName">Launch Career</div>
+      <!-- Theme toggle placeholder (optional) -->
+      <div class="bottom-area">
+      </div>
+    </aside>
+
+    <!-- TOP HEADER -->
+    <header class="heading">
+       <div class="hidden-logo">
+      <img class="app-logo mobile-logo" src="assets/favicon.svg" alt="Logo Small" />
+      </div>
+      <div class="hidden-h1">
+        <div class="board-indicator">
+        <h1>Launch Career</h1>
+        </div>
+      </div>
+
+      <div class="heading-right">
+        <!-- Desktop: second rectangle add button (top-right) -->
+        <button class="add-btn" id="addTaskTopRight">+ Add New Task</button>
+
+        <!-- Mobile / tablet: single circle button inside header (will show on small screens) -->
+        <button id="addTaskMobile" class="circle-btn" aria-label="Add Task">+</button>
+      </div>
+    </header>
+
+    <!-- KANBAN COLUMNS -->
+    <section class="column todo" data-col="todo" style="grid-area: todo;">
+      <div class="column-inner">
+        <p class="task-names"><span class="dot"></span><span id="todoTitle">TODO (0)</span></p>
+        <div id="todoList" class="task-list"></div>
+      </div>
+    </section>
+
+    <section class="column doing" data-col="doing" style="grid-area: doing;">
+      <div class="column-inner">
+        <p class="task-names"><span class="dot"></span><span id="doingTitle">DOING (0)</span></p>
+        <div id="doingList" class="task-list"></div>
+      </div>
+    </section>
+
+    <section class="column done" data-col="done" style="grid-area: done;">
+      <div class="column-inner">
+        <p class="task-names"><span class="dot"></span><span id="doneTitle">DONE (0)</span></p>
+        <div id="doneList" class="task-list"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Floating Add Button (optional, hidden on mobile by design) -->
+  <button id="addTaskFab" class="fab" aria-label="Add Task">+</button>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="modalTitle">
+    <div class="modal-content" role="document">
+      <button class="close-btn" id="closeModal" aria-label="Close">×</button>
+      <h2 id="modalTitle">Add New Task</h2>
+
+      <form id="taskForm" novalidate>
+        <input type="hidden" id="taskId" />
+
+        <label for="title">Title</label>
+        <input id="title" name="title" type="text" placeholder="e.g., Launch Epic Career 🚀" required />
+
+        <label for="desc">Description</label>
+        <textarea id="desc" name="desc" rows="3" placeholder="A short description..."></textarea>
+
+        <label for="status">Status</label>
+        <select id="status" name="status" required>
+          <option value="todo">To Do</option>
+          <option value="doing">Doing</option>
+          <option value="done">Done</option>
+        </select>
+
+        <div class="modal-actions">
+          <button type="submit" class="primary">Create Task</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
