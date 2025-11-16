@@ -3,7 +3,7 @@
  * Combined: localStorage persistence, modal management, rendering and button wiring.
  */
 
-/** Local storage key */
+ /** Local storage key */
 const STORAGE_KEY = 'kanban.tasks';
 
 /** Utility: create uid */
